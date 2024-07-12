@@ -102,7 +102,7 @@ class BannerPositionFrame {
             )
         case .topRight:
             return CGRect(
-                x: UIScreen.main.bounds.width - bannerWidth - edgeInsets.right,
+                x: UIScreen.main.bounds.width - adjustedWidth - edgeInsets.right,
                 y: -bannerHeight,
                 width: adjustedWidth - edgeInsets.left - edgeInsets.right,
                 height: bannerHeight
@@ -148,7 +148,7 @@ class BannerPositionFrame {
             )
         case .topRight:
             return CGRect(
-                x: UIScreen.main.bounds.width - bannerWidth - edgeInsets.right,
+                x: UIScreen.main.bounds.width - adjustedWidth - edgeInsets.right,
                 y: edgeInsets.top + finishYOffset,
                 width: startFrame.width,
                 height: startFrame.height

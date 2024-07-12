@@ -57,6 +57,14 @@ class BannerPositionFrame {
         )
     }
     
+    private func bannerWidthForDevice(defaultWidth: CGFloat) -> CGFloat {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                return min(350, defaultWidth)
+            } else {
+                return defaultWidth
+            }
+        }
+    
     /**
         Returns the start frame for the notification banner based on the given banner position
         - parameter bannerPosition: The position the notification banners should slide in from
@@ -75,27 +83,28 @@ class BannerPositionFrame {
     ) -> CGRect {
         
         let edgeInsets = edgeInsets ?? .zero
+        let adjustedWidth = bannerWidthForDevice(defaultWidth: bannerWidth)
         
         switch bannerPosition {
         case .bottom:
             return CGRect(
                 x: edgeInsets.left,
                 y: maxY,
-                width: bannerWidth - edgeInsets.left - edgeInsets.right,
+                width: adjustedWidth - edgeInsets.left - edgeInsets.right,
                 height: bannerHeight
             )
         case .top:
             return CGRect(
                 x: edgeInsets.left,
                 y: -bannerHeight,
-                width: bannerWidth - edgeInsets.left - edgeInsets.right,
+                width: adjustedWidth - edgeInsets.left - edgeInsets.right,
                 height: bannerHeight
             )
         case .topRight:
             return CGRect(
                 x: UIScreen.main.bounds.width - bannerWidth - edgeInsets.right,
                 y: -bannerHeight,
-                width: bannerWidth - edgeInsets.left - edgeInsets.right,
+                width: adjustedWidth - edgeInsets.left - edgeInsets.right,
                 height: bannerHeight
             )
             
@@ -121,6 +130,7 @@ class BannerPositionFrame {
     ) -> CGRect {
         
         let edgeInsets = edgeInsets ?? .zero
+        let adjustedWidth = bannerWidthForDevice(defaultWidth: bannerWidth)
 
         switch bannerPosition {
         case .bottom:
